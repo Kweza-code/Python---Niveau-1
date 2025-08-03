@@ -1,4 +1,4 @@
-
+#Small project basic calculator with two parameters.
 
 def calculation():
     print("Picked your symbol")
