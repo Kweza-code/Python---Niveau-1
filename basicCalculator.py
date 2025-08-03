@@ -1,4 +1,3 @@
-# Small project basic calculator with 2 parameters.
 
 
 def calculation():
