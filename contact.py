@@ -1,4 +1,23 @@
 import json
+import os
+
+FILE_NAME = "ok.json"
+
+
+def load():
+    if os.path.exists(FILE_NAME):
+        with open(FILE_NAME, "r") as file:
+            return json.load(file)
+    else:
+        return []
+
+
+contactList = load()
+
+
+def saveContact():
+    with open(FILE_NAME, "w") as file:
+        json.dump(contactList, file, indent=4)
 
 
 def contact():
@@ -23,13 +42,11 @@ def contact():
             actionTaken = actions[action - 1]
 
             if actionTaken == "add":
-                def phoneNumber(contactNumber):
-                    number = 0
-                    for char in contactNumber:
-                        if char.isdigit():
-                            number += 1
+                def phoneNumber():
+                    digit_count = sum(char.isdigit() for char in contactNumber)
+                    has_letter = any(char.isalpha() for char in contactNumber)
 
-                    if number > 10:
+                    if digit_count > 10 and not has_letter:
                         return True
                     else:
                         return False
