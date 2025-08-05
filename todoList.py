@@ -1,12 +1,15 @@
+import json  # put this at the top of the file
+
+
 def todo():
 
     action_choices = ["add", "delete", "all"]
     todoAll = []
     print("Veuillez choisir les options")
-    print("1 : Ajouter un todo")
-    print("2: Supprimer un todo")
-    print("3: afficher tous les todos")
-    print("0 : Quitter")
+    print("1 : Add a todo ")
+    print("2: Delete a todo")
+    print("3: Show all the todos")
+    print("0 : Exit")
 
     while True:
         try:
@@ -66,6 +69,11 @@ def todo():
 
         except ValueError:
             print("An error occurred ")
+
+    with open('read.txt', 'a') as file:
+        for todo in todoAll:
+            json.dump(todo, file)
+            file.write("\n")
 
 
 todo()

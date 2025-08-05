@@ -1,3 +1,4 @@
+import json
 
 
 def contact():
@@ -44,12 +45,30 @@ def contact():
 
                 contactName = input("Enter the name of your New contact :")
 
+                print("Do you want to enter the email of your new contact ?")
+                print("1: yes")
+                print("2: no")
+
+                answer = int(input("?"))
+
+                if answer == 1:
+                    contactEmail = input("Enter the email")
+                else:
+                    contactEmail = "No email register for this contact"
+
                 contactListe = {
                     "contactName": contactName,
-                    "contactNumber": contactNumber
+                    "contactNumber": contactNumber,
+                    "contactEmail": contactEmail
+
                 }
 
                 contactData.append(contactListe)
+
+                # Save only the newly added contact immediately
+                with open('read.txt', 'a') as file:
+                    json.dump(contactListe, file)
+                    file.write("\n")
 
                 print(f"Welcome to {contactName}")
 
@@ -68,6 +87,8 @@ def contact():
                     deleted = contactData.pop(deleteContact)
                     print(
                         f"You have deleted {deleted['contactName']}")
+                else:
+                    print("An error occured, please Try again")
 
             elif actionTaken == "showAll":
                 if contactData:

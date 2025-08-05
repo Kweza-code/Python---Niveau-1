@@ -1,4 +1,4 @@
-
+# small project convert Celcius into Farenheit and Farenheit into Celcius.
 
 def temp():
     print("Enter 1 or 2 :")
