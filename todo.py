@@ -1,3 +1,21 @@
+import json
+import os
+
+FILE_NAME = "todos.json"
+
+
+def load_todos():
+    if os.path.exists(FILE_NAME):
+        with open(FILE_NAME, "r") as file:
+            return json.load(file)
+    return []
+
+
+def save_todos(todosList):
+    with open(FILE_NAME, "w") as file:
+        json.dump(todosList, file, indent=4)
+
+
 def todo():
     print("Please enter a number :")
     print("1 : Add a todo")
@@ -6,7 +24,7 @@ def todo():
     print("4: Quite")
 
     action = ["add", "delete", "all", "quite"]
-    todosList = []
+    todosList = load_todos()
 
     while True:
 
@@ -30,6 +48,7 @@ def todo():
                     }
 
                     todosList.append(todos)
+                    save_todos(todosList)
                     print(f"New item added to your todos {newTodoName}")
 
                 elif taken == "delete":
@@ -40,14 +59,15 @@ def todo():
 
                     for index, item in enumerate(todosList):
                         print(
-                            f"{index + 1}: {item["newTodoName"], {item["newTodoDescription"]}}")
+                            f"{index + 1}: {item['newTodoName'], {item['newTodoDescription']}}")
 
                     try:
                         test = int(
                             input("Chose which item you want to delete :")) - 1
-                        if 0 <= test <= len(todosList):
+                        if 0 <= test < len(todosList):
                             removed = todosList.pop(test)
-                            print(f"You just delete {removed["newTodoName"]}")
+                            save_todos(todosList)
+                            print(f"You just delete {removed['newTodoName']}")
                         else:
                             print("Error")
 
@@ -58,7 +78,7 @@ def todo():
 
                     for index, item in enumerate(todosList):
                         print(
-                            f"{index + 1} : {item["newTodoName"]} : {item["newTodoDescription"]}")
+                            f"{index + 1} : {item['newTodoName']} : {item['newTodoDescription']}")
 
         except ValueError:
             print("An error has occured")

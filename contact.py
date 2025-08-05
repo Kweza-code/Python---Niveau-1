@@ -100,12 +100,8 @@ def contact():
 
                 deleteContact = int(
                     input("Please select the contact you want to delete ")) - 1
-                if 0 <= deleteContact < len(contactData):
-                    deleted = contactData.pop(deleteContact)
-                    print(
-                        f"You have deleted {deleted['contactName']}")
-                else:
-                    print("An error occured, please Try again")
+
+                for contact
 
             elif actionTaken == "showAll":
                 if contactData:
